@@ -13,8 +13,7 @@
 	w_class = ITEMSIZE_TINY
 	throw_range = 1
 	throw_speed = 1
-	plane = MOB_PLANE
-	layer = MOB_LAYER
+	layer = 4
 	pressure_resistance = 1
 	slot_flags = SLOT_HEAD
 	body_parts_covered = HEAD
@@ -75,7 +74,7 @@
 	stamps = null
 
 	if(info != initial(info))
-		info = html_encode(info)
+		info = rhtml_encode(info)
 		info = replacetext(info, "\n", "<BR>")
 		info = parsepencode(info)
 		return
@@ -285,6 +284,7 @@
 
 /obj/item/weapon/paper/proc/parsepencode(var/t, var/obj/item/weapon/pen/P, mob/user as mob, var/iscrayon = 0)
 //	t = copytext(sanitize(t),1,MAX_MESSAGE_LEN)
+	t = cp1251_to_utf8(t)
 
 	t = replacetext(t, "\[center\]", "<center>")
 	t = replacetext(t, "\[/center\]", "</center>")
